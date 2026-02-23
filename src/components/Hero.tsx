@@ -204,8 +204,8 @@ export default function Hero({ scrollY }: HeroProps) {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator Reveal
-      <motion.div
+      {/* {/* Scroll Indicator Reveal */}
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}

@@ -209,9 +209,9 @@ export default function CaseStudies({ scrollY }: CaseStudiesProps) {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6"
           >
-            Case <span className="text-gold">Studies</span>
+            Case<span className="text-teal"> Studies</span>
           </motion.h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-400 px-4">
             Deep dives into campaigns that moved the needle

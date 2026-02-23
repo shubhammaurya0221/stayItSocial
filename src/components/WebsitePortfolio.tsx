@@ -1,71 +1,60 @@
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const projects = [
   {
     id: 1,
     name: 'ERA Eyewear',
-    category: 'E-commerce',
     tags: ['E-commerce', 'Shopify', 'Eyewear'],
     metric: 'Premium Store',
     description: 'Modern eyewear e-commerce platform with seamless shopping experience',
     gradient: 'from-teal/20 to-gold/20',
-    size: 'large',
     url: 'https://eraeyewear.shop/'
   },
   {
     id: 2,
     name: 'Footwin',
-    category: 'E-commerce',
-    tags: ['E-commerce', 'Footwear', 'Multi-channel'],
+    tags: ['E-commerce', 'Footwear'],
     metric: 'Multi-Platform',
     description: 'Footwear brand with integrated Amazon, Flipkart & Myntra presence',
     gradient: 'from-gold/20 to-teal/20',
-    size: 'medium',
     url: 'https://www.footwin.in/'
   },
   {
     id: 3,
     name: 'Eka Eyewear',
-    category: 'E-commerce',
-    tags: ['E-commerce', 'Make in India', 'Eyewear'],
+    tags: ['E-commerce', 'Eyewear'],
     metric: 'Brand Store',
     description: 'Premium eyewear manufacturer showcasing Make in India products',
     gradient: 'from-teal/30 to-transparent',
-    size: 'medium',
     url: 'https://ekaeyewear.com/'
   },
   {
     id: 4,
     name: 'Weitech Weighing',
-    category: 'B2B Industrial',
-    tags: ['B2B', 'Industrial', 'Weighing Systems'],
+    tags: ['B2B', 'Industrial'],
     metric: 'B2B Platform',
     description: 'Professional weighing systems and industrial equipment showcase',
     gradient: 'from-gold/30 to-transparent',
-    size: 'small',
     url: 'https://weitechweighing.com/'
   },
   {
     id: 5,
     name: 'Talapatra Kala',
-    category: 'E-commerce',
-    tags: ['E-commerce', 'Handicrafts', 'Traditional'],
+    tags: ['E-commerce', 'Handicrafts'],
     metric: 'Heritage Store',
-    description: 'Traditional handicrafts and cultural artifacts e-commerce platform',
+    description: 'Traditional handicrafts and cultural artifacts platform',
     gradient: 'from-gold/20 to-teal/10',
-    size: 'medium',
     url: 'https://talapatrakala.com/'
   },
   {
     id: 6,
     name: 'Cric Studio',
-    category: 'E-commerce',
-    tags: ['E-commerce', 'Sports', 'Cricket'],
+    tags: ['E-commerce', 'Sports'],
     metric: 'Sports Store',
     description: 'Premium cricket equipment and accessories online store',
     gradient: 'from-gold/20 to-teal/10',
-    size: 'small',
     url: 'https://cricstudioinc.com/'
   }
 ];
@@ -74,92 +63,105 @@ export default function WebsitePortfolio() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section id="website-portfolio" className="py-20 sm:py-32 px-4 sm:px-6 bg-black">
+    <section id="website-portfolio" className="py-20 sm:py-32 px-4 sm:px-6 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6">
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 text-white">
             Website <span className="text-gold">Projects</span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
             Digital experiences that drive measurable business growth
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
-          {projects.map((project) => {
+        {/* STRATEGY: 
+          1. 12 columns total.
+          2. ERA (Item 0) takes 6 cols (half width) and 2 rows height.
+          3. Items 1 & 2 stack in the other 6 cols.
+          4. Items 3, 4, 5 take 4 cols each to fill the final row perfectly.
+        */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
+          {projects.map((project, index) => {
             const isHovered = hoveredId === project.id;
+            
             const gridClass =
-              project.size === 'large' ? 'md:col-span-3 md:row-span-2' :
-              project.size === 'medium' ? 'md:col-span-3' :
-              'md:col-span-2';
+              index === 0 ? 'md:col-span-6 md:row-span-2' : 
+              index === 1 ? 'md:col-span-6 md:row-span-1' :
+              index === 2 ? 'md:col-span-6 md:row-span-1' :
+              'md:col-span-4 md:row-span-1';
 
             return (
-              <a
+              <motion.a
                 key={project.id}
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative ${gridClass} cursor-pointer block`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className={`group relative ${gridClass} cursor-pointer block h-full`}
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
                 <div
                   className={`
-                    h-full min-h-[280px] rounded-3xl bg-gradient-to-br ${project.gradient}
-                    border border-white/5 p-4 sm:p-6
-                    transition-all duration-500 ease-out
-                    ${isHovered ? 'scale-[1.02] border-gold shadow-2xl shadow-gold/20' : ''}
-                    backdrop-blur-sm
-                    flex flex-col
-                    overflow-hidden
+                    h-full w-full rounded-[2.5rem] bg-gradient-to-br ${project.gradient}
+                    border border-white/10 p-8 md:p-10
+                    transition-all duration-500 ease-out flex flex-col justify-between
+                    ${isHovered ? 'scale-[1.02] border-gold/40 shadow-[0_0_40px_rgba(251,176,64,0.1)]' : ''}
+                    backdrop-blur-xl overflow-hidden
                   `}
                 >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal/10 to-transparent rounded-full blur-3xl" />
+                  {/* Glassmorphism Background Decoration */}
+                  <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-gold/10 transition-colors duration-700" />
 
-                  <div className="flex-shrink-0">
-                    <div className="flex gap-2 mb-3 flex-wrap">
+                  <div className="relative z-10">
+                    <div className="flex gap-2 mb-6">
                       {project.tags.map((tag) => (
-                        <span key={tag} className="text-xs px-2.5 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10">
+                        <span key={tag} className="text-[10px] uppercase tracking-widest px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10 font-bold">
                           {tag}
                         </span>
                       ))}
                     </div>
-
-                    <span className="inline-block px-3 py-1 rounded-full bg-white/5 text-xs text-gray-400 border border-white/10 mb-4">
-                      {project.category}
-                    </span>
+                    
+                    <h3 className={`font-bold text-white tracking-tight leading-tight transition-all
+                      ${index === 0 ? 'text-3xl md:text-5xl' : 'text-2xl md:text-3xl'}`}>
+                      {project.name}
+                    </h3>
                   </div>
 
-                  <div className="flex-grow flex flex-col justify-center">
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3">{project.name}</h3>
-                    <p className="text-xs sm:text-sm text-gray-400 mb-4">{project.description}</p>
-                  </div>
+                  <div className="relative z-10">
+                    <p className="text-gray-400 text-sm md:text-base mb-8 max-w-[90%] leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
+                    
+                    <div className="flex items-end justify-between">
+                      <div>
+                        <p className="text-gray-500 text-[10px] uppercase tracking-[0.2em] mb-1 font-bold">Performance</p>
+                        <span className="text-gold font-bold text-xl md:text-2xl drop-shadow-sm">{project.metric}</span>
+                      </div>
 
-                  <div className="flex-shrink-0 flex items-center justify-between mt-auto pt-4">
-                    <span className="text-gold font-semibold text-base sm:text-lg">{project.metric}</span>
-
-                    <div
-                      className={`
-                        w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gold to-teal
-                        flex items-center justify-center
-                        transition-all duration-500
-                        ${isHovered ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}
-                      `}
-                    >
-                      <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
+                      <div
+                        className={`
+                          w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center 
+                          transition-all duration-500 border border-white/10
+                          ${isHovered ? 'bg-gold rotate-0 scale-110' : '-rotate-45 scale-90 opacity-0'}
+                        `}
+                      >
+                        <ArrowUpRight className="w-6 h-6 text-black" />
+                      </div>
                     </div>
                   </div>
-
-                  <div
-                    className={`
-                      absolute inset-0 bg-gradient-to-t from-black/60 to-transparent
-                      transition-opacity duration-500
-                      ${isHovered ? 'opacity-100' : 'opacity-0'}
-                      pointer-events-none
-                    `}
-                  />
                 </div>
-              </a>
+              </motion.a>
             );
           })}
         </div>
@@ -167,4 +169,3 @@ export default function WebsitePortfolio() {
     </section>
   );
 }
-

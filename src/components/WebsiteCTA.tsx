@@ -1,4 +1,31 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from "lucide-react";
+import { useEffect, useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  animate,
+  useInView,
+} from "framer-motion";
+
+function Counter({ value }: { value: number }) {
+  const nodeRef = useRef(null);
+  const isInView = useInView(nodeRef, { once: true });
+  const motionValue = useMotionValue(0);
+  const rounded = useTransform(motionValue, (latest) => Math.round(latest));
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(motionValue, value, {
+        duration: 2,
+        ease: "easeOut",
+      });
+      return controls.stop;
+    }
+  }, [motionValue, value, isInView]);
+
+  return <motion.span ref={nodeRef}>{rounded}</motion.span>;
+}
 
 export default function WebsiteCTA() {
   return (
@@ -16,13 +43,14 @@ export default function WebsiteCTA() {
             </span>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-10">
-            Join 9+ businesses with websites that convert, perform, and stand out from the competition.
+            Join 9+ businesses with websites that convert, perform, and stand
+            out from the competition.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-16">
           <a
-            href={`https://wa.me/918460732085?text=${encodeURIComponent('Hello, I would like to understand more about Website Design & Development services provided by Say It Social.')}`}
+            href={`https://wa.me/918460732085?text=${encodeURIComponent("Hello, I would like to understand more about Website Design & Development services provided by Say It Social.")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gold to-teal text-black font-bold rounded-lg hover:shadow-lg hover:shadow-gold/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base"
@@ -37,21 +65,37 @@ export default function WebsiteCTA() {
         </div>
 
         <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-12 text-center border-t border-white/10 pt-8 sm:pt-12">
+          {/* Stat 1: Sites Built */}
           <div className="space-y-1 sm:space-y-2">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">9+</div>
-            <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest">Sites Built</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">
+              <Counter value={9} />+
+            </div>
+            <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest">
+              Sites Built
+            </div>
           </div>
+
+          {/* Stat 2: PageSpeed */}
           <div className="space-y-1 sm:space-y-2">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal">98%</div>
-            <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest">Avg. PageSpeed</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal">
+              <Counter value={98} />%
+            </div>
+            <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest">
+              Avg. PageSpeed
+            </div>
           </div>
+
+          {/* Stat 3: Traffic Lift */}
           <div className="space-y-1 sm:space-y-2">
-            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">300%</div>
-            <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest">Avg. Traffic Lift</div>
+            <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">
+              <Counter value={300} />%
+            </div>
+            <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest">
+              Avg. Traffic Lift
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
