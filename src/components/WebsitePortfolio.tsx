@@ -123,7 +123,7 @@ export default function WebsitePortfolio() {
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-blue-500/10 transition-colors duration-700" />
 
           <div className="relative z-10">
-            <div className="flex gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-6">
               {project.tags.map((tag) => (
                 <span key={tag} className="text-[10px] uppercase tracking-widest px-3 py-1 rounded-full bg-white/5 text-gray-400 border border-white/10 font-bold">
                   {tag}
