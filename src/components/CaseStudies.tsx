@@ -197,7 +197,6 @@ const studies: CaseStudy[] = [
 ];
 
 
-
 export default function CaseStudies({ scrollY }: CaseStudiesProps) {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 

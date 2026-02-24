@@ -1,13 +1,16 @@
-import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import SVGLogo from './SVGLogo';
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+import SVGLogo from "./SVGLogo";
 
 interface HeaderProps {
-  currentPage?: 'smm' | 'websites';
-  onPageChange?: (page: 'smm' | 'websites') => void;
+  currentPage?: "smm" | "websites";
+  onPageChange?: (page: "smm" | "websites") => void;
 }
 
-export default function Header({ currentPage = 'smm', onPageChange }: HeaderProps) {
+export default function Header({
+  currentPage = "smm",
+  onPageChange,
+}: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -15,13 +18,13 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleNavClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
-    section?.scrollIntoView({ behavior: 'smooth' });
+    section?.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
   };
 
@@ -29,51 +32,55 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-black/80 backdrop-blur-md border-b border-white/10'
-          : 'bg-transparent'
+          ? "bg-black/80 backdrop-blur-md border-b border-white/10"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-        <a href="#" className="flex items-center" onClick={(e) => {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          setMobileMenuOpen(false);
-        }}>
+        <a
+          href="#"
+          className="flex items-center"
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setMobileMenuOpen(false);
+          }}
+        >
           <SVGLogo size="sm" />
         </a>
-        
+
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-8">
           {/* Page Switcher */}
           <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded-lg border border-white/10">
             <button
               onClick={() => {
-                onPageChange?.('smm');
+                onPageChange?.("smm");
                 setMobileMenuOpen(false);
               }}
               className={`px-3 py-1.5 rounded text-sm font-semibold transition-colors duration-300 ${
-                currentPage === 'smm'
-                  ? 'text-teal bg-white/10'
-                  : 'text-gray-400 hover:text-white'
+                currentPage === "smm"
+                  ? "text-teal bg-white/10"
+                  : "text-gray-400 hover:text-white"
               }`}
             >
               Social Media
             </button>
             <button
               onClick={() => {
-                onPageChange?.('websites');
+                onPageChange?.("websites");
                 setMobileMenuOpen(false);
               }}
               className={`px-3 py-1.5 rounded text-sm font-semibold transition-colors duration-300 ${
-                currentPage === 'websites'
-                  ? 'text-teal bg-white/10'
-                  : 'text-gray-400 hover:text-white'
+                currentPage === "websites"
+                  ? "text-teal bg-white/10"
+                  : "text-gray-400 hover:text-white"
               }`}
             >
               Web Design
             </button>
           </div>
-
+          {/* 
           {currentPage === 'smm' && (
             <>
               <a
@@ -121,15 +128,51 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
                 Case Studies
               </a>
             </>
-          )}
-          <a
+          )} */}
+          {/* <a
             href={`https://wa.me/918460732085?text=${encodeURIComponent(currentPage === 'smm' ? 'Hello, I would like to understand more about Social Media Services provided by Say It Social.' : 'Hello, I would like to understand more about Website Design & Development services provided by Say It Social.')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 lg:px-6 py-2 bg-gradient-to-r from-teal to-gold text-black font-bold rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(4,170,165,0.6)] hover:shadow-teal/60 text-sm lg:text-base"
           >
             Get Started
-          </a>
+          </a> */}
+          {/* get started button */}
+          <a
+  href={`https://wa.me/918460732085?text=${encodeURIComponent(
+    currentPage === "smm"
+      ? "Hello, I would like to understand more about Social Media Services provided by Say It Social."
+      : "Hello, I would like to understand more about Website Design & Development services provided by Say It Social."
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="group relative px-4 lg:px-6 py-2 
+             rounded-lg font-semibold text-black text-sm lg:text-base
+             bg-[linear-gradient(135deg,#0D4F4B_0%,#4CB6A6_45%,#E6C27A_100%)]
+             overflow-hidden
+             transition-all duration-300
+             hover:scale-[1.04]
+             hover:shadow-[0_0_35px_rgba(230,194,122,0.35)]"
+>
+  {/* Layer 1: Glass Shine Overlay */}
+  <span
+  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500
+             bg-[linear-gradient(120deg,transparent_20%,rgba(255,255,255,0.35)_50%,transparent_80%)]
+             blur-md"
+></span>
+
+  {/* Layer 2: Moving Light Sweep (Animated on Hover) */}
+  <span
+    className="absolute -left-1/2 top-0 h-full w-1/2 
+               bg-gradient-to-r from-transparent via-white/40 to-transparent
+               skew-x-12
+               opacity-0 group-hover:opacity-100
+               group-hover:animate-[shine_1.2s_ease_forwards]"
+  ></span>
+
+  {/* Button Content */}
+  <span className="relative font-bold z-10">Connect With Our Team</span>
+</a>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -150,40 +193,40 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
             <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded-lg border border-white/10 mb-2">
               <button
                 onClick={() => {
-                  onPageChange?.('smm');
+                  onPageChange?.("smm");
                   setMobileMenuOpen(false);
                 }}
                 className={`flex-1 px-3 py-2 rounded text-sm font-semibold transition-colors duration-300 ${
-                  currentPage === 'smm'
-                    ? 'text-teal bg-white/10'
-                    : 'text-gray-400'
+                  currentPage === "smm"
+                    ? "text-teal bg-white/10"
+                    : "text-gray-400"
                 }`}
               >
                 Social Media
               </button>
               <button
                 onClick={() => {
-                  onPageChange?.('websites');
+                  onPageChange?.("websites");
                   setMobileMenuOpen(false);
                 }}
                 className={`flex-1 px-3 py-2 rounded text-sm font-semibold transition-colors duration-300 ${
-                  currentPage === 'websites'
-                    ? 'text-teal bg-white/10'
-                    : 'text-gray-400'
+                  currentPage === "websites"
+                    ? "text-teal bg-white/10"
+                    : "text-gray-400"
                 }`}
               >
                 Web Design
               </button>
             </div>
 
-            {currentPage === 'smm' && (
+            {currentPage === "smm" && (
               <>
                 <a
                   href="#all-clients"
                   className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('all-clients');
+                    handleNavClick("all-clients");
                   }}
                 >
                   Our Work
@@ -193,21 +236,21 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
                   className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('case-studies');
+                    handleNavClick("case-studies");
                   }}
                 >
                   Case Studies
                 </a>
               </>
             )}
-            {currentPage === 'websites' && (
+            {currentPage === "websites" && (
               <>
                 <a
                   href="#website-portfolio"
                   className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('website-portfolio');
+                    handleNavClick("website-portfolio");
                   }}
                 >
                   Portfolio
@@ -217,7 +260,7 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
                   className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
                   onClick={(e) => {
                     e.preventDefault();
-                    handleNavClick('website-case-studies');
+                    handleNavClick("website-case-studies");
                   }}
                 >
                   Case Studies
@@ -225,7 +268,7 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
               </>
             )}
             <a
-              href={`https://wa.me/918460732085?text=${encodeURIComponent(currentPage === 'smm' ? 'Hello, I would like to understand more about Social Media Services provided by Say It Social.' : 'Hello, I would like to understand more about Website Design & Development services provided by Say It Social.')}`}
+              href={`https://wa.me/918460732085?text=${encodeURIComponent(currentPage === "smm" ? "Hello, I would like to understand more about Social Media Services provided by Say It Social." : "Hello, I would like to understand more about Website Design & Development services provided by Say It Social.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-gradient-to-r from-teal to-gold text-black font-bold rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(4,170,165,0.6)] hover:shadow-teal/60 text-center"
@@ -239,4 +282,3 @@ export default function Header({ currentPage = 'smm', onPageChange }: HeaderProp
     </header>
   );
 }
-

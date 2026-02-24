@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import Hero from '../components/Hero';
 import BentoGrid from '../components/BentoGrid';
 import CaseStudies from '../components/CaseStudies';
@@ -17,10 +17,10 @@ export default function SMM({ scrollY }: SMMProps) {
     <div className="bg-black text-white overflow-x-hidden">
       <Hero scrollY={scrollY} />
       <BentoGrid />
-      <CaseStudies scrollY={scrollY} />
+      {/* <CaseStudies scrollY={scrollY} /> */}
       <ClientsShowcase />
       <Showreel />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <CTABanner />
       <Footer />
     </div>

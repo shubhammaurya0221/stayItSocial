@@ -19,8 +19,8 @@ export default function Websites() {
     <div className="bg-black text-white overflow-x-hidden">
       <WebsiteHero scrollY={scrollY} />
       <WebsitePortfolio />
-      <WebsiteCaseStudies scrollY={scrollY} />
-      <Testimonials />
+      {/* <WebsiteCaseStudies scrollY={scrollY} /> */}
+      {/* <Testimonials /> */}
       <WebsiteCTA />
       <Footer />
     </div>

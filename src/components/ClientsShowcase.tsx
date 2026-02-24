@@ -18,7 +18,8 @@ const allClients: Client[] = [
     brand: "Cricstudioinc",
     category: "Sports Content",
     description: "Cricket content & brand building - Building a strong community around sports content",
-    gradient: "from-teal/20 to-gold/20",
+    // Deep Emerald Mesh
+    gradient: "from-[#022c22] via-[#052e16] to-black",
     instagramHandle: "cricstudioinc",
     instagramPosts: [],
   },
@@ -27,7 +28,8 @@ const allClients: Client[] = [
     brand: "Shiva Optics Plus",
     category: "Premium Eyewear",
     description: "Transforming premium eyewear brand presence with sophisticated, minimal design",
-    gradient: "from-gold/20 to-teal/20",
+    // Deep Bronze/Stone Mesh
+    gradient: "from-[#1c1917] via-[#292524] to-black",
     instagramHandle: "shivaoptics",
     instagramPosts: [],
   },
@@ -36,7 +38,8 @@ const allClients: Client[] = [
     brand: "Shiva Enterprise",
     category: "E-commerce",
     description: "Modern eyewear e-commerce social strategy - Thoughtfully selected products",
-    gradient: "from-teal/20 to-gold/20",
+    // Midnight Teal Mesh
+    gradient: "from-[#042f2e] via-[#0f172a] to-black",
     instagramHandle: "shivaenterprise.in",
     instagramPosts: [],
   },
@@ -45,7 +48,8 @@ const allClients: Client[] = [
     brand: "The Quick Craft",
     category: "AI & VR Solutions",
     description: "AI-powered design & VR solutions - Leveraging AI and human creativity",
-    gradient: "from-gold/20 to-teal/20",
+    // Cyber Purple/Slate Mesh
+    gradient: "from-[#1e1b4b] via-[#312e81] to-black",
     instagramHandle: "tqc.official",
     instagramPosts: [],
   },
@@ -54,7 +58,8 @@ const allClients: Client[] = [
     brand: "Dronagiri Herbal",
     category: "Skincare & Haircare",
     description: "Natural skincare & haircare brand launch - 100% herbal products",
-    gradient: "from-teal/20 to-gold/20",
+    // Forest Moss Mesh
+    gradient: "from-[#064e3b] via-[#022c22] to-black",
     instagramHandle: "dronagiri_herbal_india",
     instagramPosts: [],
   },
@@ -63,7 +68,8 @@ const allClients: Client[] = [
     brand: "Shivaangi Hostel",
     category: "Student Accommodation",
     description: "Student accommodation brand building - Establishing trust within education community",
-    gradient: "from-gold/20 to-teal/20",
+    // Warm Slate Mesh
+    gradient: "from-[#334155] via-[#0f172a] to-black",
     instagramHandle: "shivaangi_hostel",
     instagramPosts: [],
   },
@@ -72,7 +78,8 @@ const allClients: Client[] = [
     brand: "Kalon Ethnic",
     category: "Fashion & Lifestyle",
     description: "Traditional fashion brand digital presence - Bridging traditional with modern",
-    gradient: "from-teal/20 to-gold/20",
+    // Deep Espresso/Gold Mesh
+    gradient: "from-[#422006] via-[#1a0f02] to-black",
     instagramHandle: "kalon.ethnic",
     instagramPosts: [],
   },
@@ -81,7 +88,8 @@ const allClients: Client[] = [
     brand: "Vortex Educational Consultants",
     category: "Education Services",
     description: "Education services marketing - Building authority and trust in education sector",
-    gradient: "from-gold/20 to-teal/20",
+    // Royal Navy Mesh
+    gradient: "from-[#172554] via-[#1e1b4b] to-black",
     instagramHandle: "vortex_educational_consultants",
     instagramPosts: [],
   },
@@ -98,26 +106,19 @@ const containerVariants = {
   },
 };
 
+// Fixed Variants to resolve your TypeScript error
 const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 60, 
-    scale: 0.92,
-  },
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 1.2, 
-      ease: [0.22, 1, 0.36, 1], // Premium smooth deceleration
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1], // Corrected ease format
     },
   },
-  exit: {
-    opacity: 0,
-    scale: 0.9,
-    transition: { duration: 0.4 },
-  },
+  exit: { opacity: 0, scale: 0.9, transition: { duration: 0.3 } },
 };
 
 export default function ClientsShowcase() {

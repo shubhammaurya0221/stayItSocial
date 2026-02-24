@@ -55,29 +55,39 @@ export default function CTABanner() {
               Social Presence?
             </span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-10 px-4">
+          {/* <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-10 px-4">
             Join brands that transformed their social media into
             revenue-generating engines.
-          </p>
+          </p> */}
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-14 md:mb-16 px-4">
-          <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-teal to-gold text-black font-bold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_rgba(4,170,165,0.7)] hover:shadow-teal/70 flex items-center justify-center gap-2 text-sm sm:text-base">
-            Start Your Campaign
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
-          <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/20 text-white font-bold rounded-lg hover:border-gold hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-[0_0_25px_rgba(251,176,64,0.5)] hover:shadow-gold/50 text-sm sm:text-base">
-            View Case Studies
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
+          <motion.a
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 0px 30px rgba(20, 184, 166, 0.4)",
+            }}
+            whileTap={{ scale: 0.98 }}
+            href={`googleForm`}
+            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 
+             bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#d4af37] 
+             text-black font-bold rounded-lg overflow-hidden 
+             transition-all duration-300 text-sm sm:text-base cursor-pointer"
+          >
+            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-white/30 via-white/10 to-transparent blur-md"></span>
+            <span className="absolute -left-1/2 top-0 h-full w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-[shine_1.2s_ease_forwards]"></span>
+            <span className="relative z-10">Start Your Journey</span>
+          </motion.a>
         </div>
 
         <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-12 text-center border-t border-white/10 pt-8 sm:pt-10 md:pt-12 px-4">
           {/* Campaigns */}
           <div className="space-y-1 sm:space-y-2">
-            <Counter value="15+" colorClass="text-teal" />
+            <Counter value="10+" colorClass="text-teal" />
             <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest leading-tight">
-              Successful Campaigns
+              Industries
             </div>
           </div>
 
@@ -91,9 +101,9 @@ export default function CTABanner() {
 
           {/* ROAS */}
           <div className="space-y-1 sm:space-y-2">
-            <Counter value="2x" colorClass="text-teal" />
+            <Counter value="5+" colorClass="text-teal" />
             <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 uppercase tracking-widest leading-tight">
-              Average ROAS
+              Lead Velocity
             </div>
           </div>
         </div>

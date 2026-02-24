@@ -7,6 +7,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState<'smm' | 'websites'>('smm');
   const [scrollY, setScrollY] = useState(0);
 
+  // track how much the user has scrolled
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll, { passive: true });
