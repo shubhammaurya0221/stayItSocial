@@ -33,6 +33,31 @@ interface WebsiteHeroProps {
 }
 
 // Animation Variants
+const headingReveal = {
+  hidden: {
+    opacity: 1
+  },
+  visible: {
+    transition: {
+      staggerChildren: 0.08
+    }
+  }
+};
+
+const lineReveal = {
+  hidden: {
+    y: "100%",
+    opacity: 0
+  },
+  visible: {
+    y: "0%",
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -80,22 +105,30 @@ export default function WebsiteHero({ scrollY }: WebsiteHeroProps) {
       />
 
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 px-4 sm:px-6 max-w-5xl mx-auto text-center"
+      variants={headingReveal}
+  initial="hidden"
+  animate="visible"
+  className="relative z-10 px-4 sm:px-6 max-w-5xl mx-auto text-center overflow-hidden"
       >
         {/* Headline */}
-        <motion.h1 
-          variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 leading-tight text-white px-2"
-        >
-          Digital Experiences That
-          <br />
-          <span className="bg-gradient-to-r from-gold via-gold to-teal bg-clip-text text-transparent italic drop-shadow-[0_0_8px_rgba(251,176,64,0.4)]">
-            Convert & Captivate
-          </span>
-        </motion.h1>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 sm:mb-8 leading-tight text-white px-2">
+
+    <div className="overflow-hidden">
+      <motion.span variants={lineReveal} className="block">
+        Website Experiences That
+      </motion.span>
+    </div>
+
+    <div className="overflow-hidden">
+      <motion.span
+        variants={lineReveal}
+        className="block bg-gradient-to-r from-gold via-gold to-teal bg-clip-text text-transparent italic drop-shadow-[0_0_8px_rgba(251,176,64,0.4)]"
+      >
+        Convert & Captivate
+      </motion.span>
+    </div>
+
+  </h1>
 
         {/* Subtext */}
         <motion.p
@@ -120,14 +153,18 @@ export default function WebsiteHero({ scrollY }: WebsiteHeroProps) {
             }}
             whileTap={{ scale: 0.98 }}
             href={`https://wa.me/918460732085?text=${encodeURIComponent("Hello!")}`}
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 
-             bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#d4af37] 
-             text-black font-bold rounded-lg overflow-hidden 
-             transition-all duration-300 text-sm sm:text-base cursor-pointer"
+            className="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4
+             rounded-lg font-semibold text-black text-sm lg:text-base
+             bg-[linear-gradient(135deg,#0D4F4B_0%,#4CB6A6_45%,#E6C27A_100%)]
+             overflow-hidden
+             transition-all duration-300
+             hover:scale-[1.04]
+             hover:shadow-[0_0_35px_rgba(230,194,122,0.35)]"
+
           >
             <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-white/30 via-white/10 to-transparent blur-md"></span>
             <span className="absolute -left-1/2 top-0 h-full w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-[shine_1.2s_ease_forwards]"></span>
-            <span className="relative z-10">Connect With Our Team</span>
+            <span className="relative font-bold z-10">Connect With Our Team</span>
           </motion.a>
 
           {/* Secondary CTA: Start a Project */}

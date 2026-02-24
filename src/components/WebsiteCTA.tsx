@@ -42,26 +42,27 @@ export default function WebsiteCTA() {
               Digital Masterpiece?
             </span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 sm:mb-10">
-            Join 9+ businesses with websites that convert, perform, and stand
-            out from the competition.
-          </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-16">
-          <a
-            href={`https://wa.me/918460732085?text=${encodeURIComponent("Hello, I would like to understand more about Website Design & Development services provided by Say It Social.")}`}
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-14 md:mb-16 px-4">
+          <motion.a
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gold to-teal text-black font-bold rounded-lg hover:shadow-lg hover:shadow-gold/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 text-sm sm:text-base"
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 0px 30px rgba(20, 184, 166, 0.4)",
+            }}
+            whileTap={{ scale: 0.98 }}
+            href={`#`}
+            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 
+             bg-gradient-to-r from-[#0f766e] via-[#14b8a6] to-[#d4af37] 
+             text-black font-bold rounded-lg overflow-hidden 
+             transition-all duration-300 text-sm sm:text-base cursor-pointer"
           >
-            Start Your Site
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </a>
-          <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/20 text-white font-bold rounded-lg hover:border-teal hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
-            View Pricing
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
+            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-r from-white/30 via-white/10 to-transparent blur-md"></span>
+            <span className="absolute -left-1/2 top-0 h-full w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 opacity-0 group-hover:opacity-100 group-hover:animate-[shine_1.2s_ease_forwards]"></span>
+            <span className="relative z-10">Start Your Journey</span>
+          </motion.a>
         </div>
 
         <div className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-12 text-center border-t border-white/10 pt-8 sm:pt-12">

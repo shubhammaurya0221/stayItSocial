@@ -22,6 +22,20 @@ export default function Header({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+  if (mobileMenuOpen) {
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+  } else {
+    // Enable scrolling
+    document.body.style.overflow = 'unset';
+  }
+
+  // Cleanup function to ensure scroll is restored if component unmounts
+  return () => {
+    document.body.style.overflow = 'unset';
+  };
+}, [mobileMenuOpen]);
   const handleNavClick = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     section?.scrollIntoView({ behavior: "smooth" });
@@ -139,146 +153,120 @@ export default function Header({
           </a> */}
           {/* get started button */}
           <a
-  href={`https://wa.me/918460732085?text=${encodeURIComponent(
-    currentPage === "smm"
-      ? "Hello, I would like to understand more about Social Media Services provided by Say It Social."
-      : "Hello, I would like to understand more about Website Design & Development services provided by Say It Social."
-  )}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="group relative px-4 lg:px-6 py-2 
-             rounded-lg font-semibold text-black text-sm lg:text-base
-             bg-[linear-gradient(135deg,#0D4F4B_0%,#4CB6A6_45%,#E6C27A_100%)]
-             overflow-hidden
-             transition-all duration-300
-             hover:scale-[1.04]
-             hover:shadow-[0_0_35px_rgba(230,194,122,0.35)]"
->
-  {/* Layer 1: Glass Shine Overlay */}
-  <span
-  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500
-             bg-[linear-gradient(120deg,transparent_20%,rgba(255,255,255,0.35)_50%,transparent_80%)]
-             blur-md"
-></span>
-
-  {/* Layer 2: Moving Light Sweep (Animated on Hover) */}
-  <span
-    className="absolute -left-1/2 top-0 h-full w-1/2 
-               bg-gradient-to-r from-transparent via-white/40 to-transparent
-               skew-x-12
-               opacity-0 group-hover:opacity-100
-               group-hover:animate-[shine_1.2s_ease_forwards]"
-  ></span>
-
-  {/* Button Content */}
-  <span className="relative font-bold z-10">Connect With Our Team</span>
-</a>
+          href={`https://wa.me/918460732085?text=${encodeURIComponent(
+            currentPage === "smm"
+              ? "Hello, I would like to understand more about Social Media Services provided by Say It Social."
+              : "Hello, I would like to understand more about Website Design & Development services provided by Say It Social."
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative px-4 lg:px-6 py-2 
+                     rounded-lg font-semibold text-black text-sm lg:text-base
+                     bg-[linear-gradient(135deg,#0D4F4B_0%,#4CB6A6_45%,#E6C27A_100%)]
+                     overflow-hidden
+                     transition-all duration-300
+                     hover:scale-[1.04]
+                     hover:shadow-[0_0_35px_rgba(230,194,122,0.35)]"
+        >
+          {/* Layer 1: Glass Shine Overlay */}
+          <span
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500
+                     bg-[linear-gradient(120deg,transparent_20%,rgba(255,255,255,0.35)_50%,transparent_80%)]
+                     blur-md"
+        ></span>
+        
+          {/* Layer 2: Moving Light Sweep (Animated on Hover) */}
+          <span
+            className="absolute -left-1/2 top-0 h-full w-1/2 
+                       bg-gradient-to-r from-transparent via-white/40 to-transparent
+                       skew-x-12
+                       opacity-0 group-hover:opacity-100
+                       group-hover:animate-[shine_1.2s_ease_forwards]"
+          ></span>
+        
+          {/* Button Content */}
+          <span className="relative font-bold z-10">Connect With Our Team</span>
+        </a>
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-gray-300 hover:text-gold transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          className="relative w-8 h-8 flex flex-col justify-center items-center md:hidden z-50"
+>        
+          <span
+            className={`absolute h-0.5 w-6 bg-white transition-all duration-300 ${
+              mobileMenuOpen ? "rotate-45" : "-translate-y-2"
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-6 bg-white transition-all duration-300 ${
+              mobileMenuOpen ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`absolute h-0.5 w-6 bg-white transition-all duration-300 ${
+              mobileMenuOpen ? "-rotate-45" : "translate-y-2"
+            }`}
+          />
+          </button>
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-white/10 bg-black/95 backdrop-blur-md">
-          <nav className="flex flex-col px-4 py-4 space-y-4">
-            {/* Page Switcher */}
-            <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded-lg border border-white/10 mb-2">
-              <button
-                onClick={() => {
-                  onPageChange?.("smm");
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex-1 px-3 py-2 rounded text-sm font-semibold transition-colors duration-300 ${
-                  currentPage === "smm"
-                    ? "text-teal bg-white/10"
-                    : "text-gray-400"
-                }`}
-              >
-                Social Media
-              </button>
-              <button
-                onClick={() => {
-                  onPageChange?.("websites");
-                  setMobileMenuOpen(false);
-                }}
-                className={`flex-1 px-3 py-2 rounded text-sm font-semibold transition-colors duration-300 ${
-                  currentPage === "websites"
-                    ? "text-teal bg-white/10"
-                    : "text-gray-400"
-                }`}
-              >
-                Web Design
-              </button>
-            </div>
+     {mobileMenuOpen && (
+  <div className="fixed inset-0 z-40 md:hidden">
 
-            {currentPage === "smm" && (
-              <>
-                <a
-                  href="#all-clients"
-                  className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("all-clients");
-                  }}
-                >
-                  Our Work
-                </a>
-                <a
-                  href="#case-studies"
-                  className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("case-studies");
-                  }}
-                >
-                  Case Studies
-                </a>
-              </>
-            )}
-            {currentPage === "websites" && (
-              <>
-                <a
-                  href="#website-portfolio"
-                  className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("website-portfolio");
-                  }}
-                >
-                  Portfolio
-                </a>
-                <a
-                  href="#website-case-studies"
-                  className="text-gray-300 hover:text-gold transition-colors py-2 text-base"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick("website-case-studies");
-                  }}
-                >
-                  Case Studies
-                </a>
-              </>
-            )}
-            <a
-              href={`https://wa.me/918460732085?text=${encodeURIComponent(currentPage === "smm" ? "Hello, I would like to understand more about Social Media Services provided by Say It Social." : "Hello, I would like to understand more about Website Design & Development services provided by Say It Social.")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-gradient-to-r from-teal to-gold text-black font-bold rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(4,170,165,0.6)] hover:shadow-teal/60 text-center"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Get Started
-            </a>
-          </nav>
+    {/* Background Blur */}
+    <div
+      className="absolute inset-0 bg-black/70 backdrop-blur-lg"
+      onClick={() => setMobileMenuOpen(false)}
+    />
+
+    {/* Menu Panel */}
+    <div className="relative z-50 mt-20 mx-4 rounded-2xl border border-white/10 bg-black/90 backdrop-blur-xl shadow-[0_0_40px_rgba(0,0,0,0.6)]">
+
+      <nav className="flex flex-col px-4 py-6 space-y-4">
+
+        <div className="flex items-center gap-2 px-2 py-1 bg-white/5 rounded-lg border border-white/10">
+          <button
+            onClick={() => {
+              onPageChange?.("smm");
+              setMobileMenuOpen(false);
+            }}
+            className={`flex-1 px-3 py-2 rounded text-sm font-semibold transition-colors duration-300 ${
+              currentPage === "smm"
+                ? "text-teal bg-white/10"
+                : "text-gray-400"
+            }`}
+          >
+            Social Media
+          </button>
+
+          <button
+            onClick={() => {
+              onPageChange?.("websites");
+              setMobileMenuOpen(false);
+            }}
+            className={`flex-1 px-3 py-2 rounded text-sm font-semibold transition-colors duration-300 ${
+              currentPage === "websites"
+                ? "text-teal bg-white/10"
+                : "text-gray-400"
+            }`}
+          >
+            Web Design
+          </button>
         </div>
-      )}
+
+      </nav>
+    </div>
+
+    {/* Bottom Center Logo */}
+    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-80">
+      <SVGLogo size="sm" />
+    </div>
+
+  </div>
+)}
     </header>
   );
 }
